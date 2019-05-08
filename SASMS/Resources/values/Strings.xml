@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="AppName">短信转发</string>
+  <string name="labFilter">过滤条件：</string>
+  <string name="labTest">调试模式：</string>
+</resources>

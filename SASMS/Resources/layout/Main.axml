@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="@string/labFilter"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tbxState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:textColor="@android:color/darker_gray" />
+    </LinearLayout>
+    <EditText
+        android:inputType="textMultiLine"
+        android:id="@+id/tbxFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="【CSDN】,验证码" />
+    <Switch
+        android:id="@+id/swhTest"
+        android:text="@string/labTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ToggleButton
+        android:id="@+id/btnLinsten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvList" />
+</LinearLayout>
