@@ -1,6 +1,8 @@
 # SASMS
 Stone Andorid SMS
 
-获取手机中的CSDN验证码，发送到共享平台，用于CSDN账号共享，下载资源分共享
+VS2017 - Mone
+
+鑾峰彇鎵嬫満涓殑CSDN楠岃瘉鐮侊紝鍙戦�佸埌鍏变韩骞冲彴锛岀敤浜嶤SDN璐﹀彿鍏变韩锛屼笅杞借祫婧愬垎鍏变韩
 
 Get the CSDN authentication code in the mobile phone and send it to the sharing platform for sharing CSDN accounts and downloading resources.  (baidu translate)
