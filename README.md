@@ -1,7 +1,7 @@
 # SASMS
 Stone Andorid SMS
 
-VS2017 - Mone
+VS2017 - Mono
 
 获取手机中的CSDN验证码，发送到共享平台，用于CSDN账号共享，下载资源分共享
 
