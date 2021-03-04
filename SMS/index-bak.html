@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>短信转发</title>
+	<script src="js/mui.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/vant.min.js"></script>
+    <script type="text/javascript">
+    	  
+    	// H5 plus事件处理
+    	function plusReady(){
+    	}
+    	if(window.plus){
+    		plusReady();
+    	}else{
+    		document.addEventListener('plusready', plusReady, false);
+    	}
+   		// document.addEventListener('plusready', function(){
+   		// 	//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。")
+   			
+   		// });
+		
+	// 发送邮件
+	function mailTest(){
+		var msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
+		msg.to = ['15618291357']; 
+		msg.body = 'app test';
+		plus.messaging.sendMessage( msg, function () {
+			alert( "Send success!" );
+		}, function () {
+			alert( "Send failed!" );
+		} );
+   	} 
+	
+	function sendMsg(value){
+		mui.ajax('http://121.199.29.234:8080',{
+			data:{
+				qq:'shijinglin',
+				msg:value,
+				ts: (new Date()).valueOf()
+			},
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			headers:{'Content-Type':'application/json'},	              
+			success:function(data){
+				//服务器返回响应，根据响应结果，分析是否登录成功；
+				alert(data.msg); 
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				alert(type ); 
+			}
+		});
+	} 
+    </script> 
+</head>
+<body>
+	<button type="button" onclick="mailTest()">Send Mail</button>
+	<button type="button" onclick="sendMsg(123)">sendmsg</button> 
+</body>
+</html>
