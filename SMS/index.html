@@ -131,15 +131,17 @@
 		        var content = msgs[i].getDisplayMessageBody();  
 				//sendMsg(content) ;
 		        //匹配短信内容，若短信内容包含“XX网”，则认为初步匹配成功  
-		        if (~content.indexOf('关爱通') && ~content.indexOf('验证码')) {  
-		            //匹配验证码规则，比如包含6位数字  
-		            var matches = content.match(codeRegex);  
-		            if (matches && matches.length) {  
-		                var code = matches[0];   
-						sendMsg('shijinglin','关爱通验证码：' + code);
-						sendMsg('yu_stone2007','关爱通验证码：' + code);
-		                break;  
-		            }
+		        if (~content.indexOf('关爱通') && ~content.indexOf('验证码')) {   
+					sendMsg('shijinglin',content);
+					sendMsg('yu_stone2007',content); 
+		    //         //匹配验证码规则，比如包含6位数字  
+		    //         var matches = content.match(codeRegex);  
+		    //         if (matches && matches.length) {  
+		    //             var code = matches[0];   
+						// sendMsg('shijinglin','关爱通验证码：' + code);
+						// sendMsg('yu_stone2007','关爱通验证码：' + code);
+		    //             break;  
+		    //         }
 		        }  
 		    }  
 		};  
@@ -148,11 +150,12 @@
 		register(handleSMS);
 		 
 		function sendMsg(wxid, value){
+			var tsval = (new Date()).valueOf();
 			mui.ajax('http://121.199.29.234:8080',{
 				data:{
 					qq:wxid,
 					msg:value,
-					ts: (new Date()).valueOf()
+					ts: tsval
 				},
 				dataType:'json',//服务器返回json格式数据
 				type:'post',//HTTP请求类型
@@ -160,21 +163,29 @@
 				headers:{'Content-Type':'application/json'},	              
 				success:function(data){
 					//服务器返回响应，根据响应结果，分析是否登录成功；
-					alert(data.msg); 
+					document.getElementById("resvalue").innerText = data.msg + " " + tsval; 
 				},
 				error:function(xhr,type,errorThrown){
 					//异常处理；
-					alert(type ); 
+					document.getElementById("resvalue").innerText = type; 
 				}
 			});
-		} 
+		}  
 		
-		
+		function sendMsg2(wxid, value){
+			sendMsg(document.getElementById("msgto").value,document.getElementById("msgcontent").value);
+			}
     </script>
-	
 </head>
-<body>
+<body style="font-size: 1.25rem;">
 	<h1>短信转发</h1>
-	<button type="button" onclick="sendMsg('shijinglin','SMS APP 测试消息')">test</button>
+	<label>接收人：</label>
+	<input style="font-size: 1rem; width: 100% ;"  type="text" id="msgto" value="shijinglin" />
+	<br/>
+	<label>内容：</label>
+	<input style="font-size: 1rem; width: 100% " type="text" id="msgcontent" value="" />
+	<label style="font-size: 1rem; width: 100%; color: blue;" id="resvalue"></label>
+	<br/>
+	<button style="font-size: 1.25rem; margin-top: 3rem ; width: 8rem ; height: 3rem; " type="button" onclick="sendMsg2()">发送</button>
 </body>
 </html>
