@@ -19,11 +19,40 @@
 		//plusReady封装，若使用mui，可直接使用mui.plusReady()方法；  
 		var plusReady = function(callback){  
 		     if (window.plus) {  
+				 //核心工作进程
 		        callback();  
 		    } else {
-		        document.addEventListener("plusready", function() {  
-		            callback();  
-		        }, false);  
+				//API 初始化完成
+		        document.addEventListener("plusready", function() {
+					//核心工作进程
+					callback();  
+					//转后台运行
+					document.addEventListener("pause", function() {  
+		            callback(); 
+					}, false); 
+					//恢复到前台
+					document.addEventListener("resume", function() {
+					    callback();  
+					}, false); 
+					//网络变化
+					document.addEventListener("netchange", function() {
+					   var nt = plus.networkinfo.getCurrentType();
+					   	switch (nt){
+					   		case plus.networkinfo.CONNECTION_ETHERNET:
+					   		case plus.networkinfo.CONNECTION_WIFI:
+								document.getElementById("resvalue").innerText = "Wifi模式"; 
+								break; 
+					   		case plus.networkinfo.CONNECTION_CELL2G:
+					   		case plus.networkinfo.CONNECTION_CELL3G:
+					   		case plus.networkinfo.CONNECTION_CELL4G:
+								document.getElementById("resvalue").innerText ="流量模式";  
+								break; 
+					   		default:
+								document.getElementById("resvalue").innerText = "无网络"; 
+								break;
+					   	}
+					}, false); 
+		        }, false); 
 		    }  
 		}  
 		
@@ -184,7 +213,7 @@
 	<br/>
 	<label>内容：</label>
 	<input style="font-size: 1rem; width: 100% " type="text" id="msgcontent" value="" />
-	<label style="font-size: 1rem; width: 100%; color: blue;" id="resvalue"></label>
+	<label style="font-size: 1rem; width: 100%; color: blue;" id="resvalue" ></label>
 	<br/>
 	<button style="font-size: 1.25rem; margin-top: 3rem ; width: 8rem ; height: 3rem; " type="button" onclick="sendMsg2()">发送</button>
 </body>
